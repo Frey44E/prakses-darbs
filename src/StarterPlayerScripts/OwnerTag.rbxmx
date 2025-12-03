@@ -1,0 +1,70 @@
+<roblox xmlns:xmime="http://www.w3.org/2005/05/xmlmime" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.roblox.com/roblox.xsd" version="4">
+	<Meta name="ExplicitAutoJoints">true</Meta>
+	<External>null</External>
+	<External>nil</External>
+	<Item class="LocalScript" referent="RBXE947DE28816240818D59E7724C1F3F7F">
+		<Properties>
+			<ProtectedString name="Source"><![CDATA[-- Main Script (Local Script inside StarterPlayerScripts)
+
+local TextChatService = game:GetService("TextChatService")
+
+local Players = game:GetService("Players")
+
+
+
+local r, g, b = 255, 176, 0
+
+local ChatTagText = "[Owner]"
+
+local TagOwners = {
+
+    ["Frey36E"] = true,
+
+	["Frey35E"] = true,
+
+}
+
+
+
+TextChatService.OnIncomingMessage = function(message: TextChatMessage)
+
+    if message.TextSource then
+
+        local senderName = Players:GetNameFromUserIdAsync(message.TextSource.UserId)
+
+        if TagOwners[senderName] then
+
+            local props = Instance.new("TextChatMessageProperties")
+
+            props.PrefixText = string.format(
+
+                "<font color='rgb(%d,%d,%d)'>%s</font> %s",
+
+                r, g, b, ChatTagText, message.PrefixText or ""
+
+            )
+
+            return props
+
+        end
+
+    end
+
+
+
+    return nil
+
+end]]></ProtectedString>
+			<bool name="Disabled">false</bool>
+			<Content name="LinkedSource"><null></null></Content>
+			<token name="RunContext">0</token>
+			<string name="ScriptGuid">{66977D17-D9DB-4D58-8BBB-EB677471830D}</string>
+			<BinaryString name="AttributesSerialize"></BinaryString>
+			<SecurityCapabilities name="Capabilities">0</SecurityCapabilities>
+			<bool name="DefinesCapabilities">false</bool>
+			<string name="Name">OwnerTag</string>
+			<int64 name="SourceAssetId">-1</int64>
+			<BinaryString name="Tags"></BinaryString>
+		</Properties>
+	</Item>
+</roblox>
