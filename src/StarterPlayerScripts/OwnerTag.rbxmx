@@ -2,63 +2,60 @@
 	<Meta name="ExplicitAutoJoints">true</Meta>
 	<External>null</External>
 	<External>nil</External>
-	<Item class="LocalScript" referent="RBXE947DE28816240818D59E7724C1F3F7F">
+	<Item class="LocalScript" referent="RBX4320AE89DD004153907D3B086C10C886">
 		<Properties>
-			<ProtectedString name="Source"><![CDATA[-- Main Script (Local Script inside StarterPlayerScripts)
-
-local TextChatService = game:GetService("TextChatService")
-
+			<ProtectedString name="Source"><![CDATA[local TextChatService = game:GetService("TextChatService")
 local Players = game:GetService("Players")
 
-
-
-local r, g, b = 255, 176, 0
-
 local ChatTagText = "[Owner]"
-
 local TagOwners = {
-
-    ["Frey36E"] = true,
-
-	["Frey35E"] = true,
-
+	["Frey36E"] = true,
 }
 
 
-
-TextChatService.OnIncomingMessage = function(message: TextChatMessage)
-
-    if message.TextSource then
-
-        local senderName = Players:GetNameFromUserIdAsync(message.TextSource.UserId)
-
-        if TagOwners[senderName] then
-
-            local props = Instance.new("TextChatMessageProperties")
-
-            props.PrefixText = string.format(
-
-                "<font color='rgb(%d,%d,%d)'>%s</font> %s",
-
-                r, g, b, ChatTagText, message.PrefixText or ""
-
-            )
-
-            return props
-
-        end
-
-    end
+local startColor = Color3.fromRGB(0, 0, 0)
+local endColor   = Color3.fromRGB(255, 0, 0)
 
 
+local function getGradientTag(text)
+	local result = ""
+	local len = #text
+	for i = 1, len do
+		local t = (i - 1) / math.max(len - 1, 1)
+		local r = math.floor(startColor.R * 255 * (1 - t) + endColor.R * 255 * t)
+		local g = math.floor(startColor.G * 255 * (1 - t) + endColor.G * 255 * t)
+		local b = math.floor(startColor.B * 255 * (1 - t) + endColor.B * 255 * t)
+		local char = text:sub(i, i)
+		result = result .. string.format("<font color='rgb(%d,%d,%d)'>%s</font>", r, g, b, char)
+	end
+	return result
+end
 
-    return nil
 
+local function getFullTag()
+	local gradientTag = getGradientTag(ChatTagText)
+	local redSlash = string.format("<font color='rgb(%d,%d,%d)'></font>",
+		math.floor(endColor.R * 255),
+		math.floor(endColor.G * 255),
+		math.floor(endColor.B * 255))
+	return gradientTag .. " " .. redSlash
+end
+
+TextChatService.OnIncomingMessage = function(message)
+	if message.TextSource then
+		local senderName = Players:GetNameFromUserIdAsync(message.TextSource.UserId)
+		if TagOwners[senderName] then
+			local props = Instance.new("TextChatMessageProperties")
+			props.PrefixText = getFullTag() .. " " .. (message.PrefixText or "")
+			return props
+		end
+	end
+	return nil
 end]]></ProtectedString>
 			<bool name="Disabled">false</bool>
 			<Content name="LinkedSource"><null></null></Content>
 			<token name="RunContext">0</token>
-			<string name="ScriptGuid">{66977D17-D9DB-4D58-8BBB-EB677471830D}</string>
+			<string name="ScriptGuid">{7BB74E9E-585C-4AFB-9FEB-01AF2B2F6B84}</string>
 			<BinaryString name="AttributesSerialize"></BinaryString>
 			<SecurityCapabilities name="Capabilities">0</SecurityCapabilities>
 			<bool name="DefinesCapabilities">false</bool>

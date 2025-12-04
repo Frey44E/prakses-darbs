@@ -2,7 +2,7 @@
 	<Meta name="ExplicitAutoJoints">true</Meta>
 	<External>null</External>
 	<External>nil</External>
-	<Item class="LocalScript" referent="RBXB083C0468D3E4BBEA0982A4971D797FD">
+	<Item class="LocalScript" referent="RBXAF8F62714D26488C88DE426394D24092">
 		<Properties>
 			<ProtectedString name="Source"><![CDATA[-- Main Script (Local Script inside StarterPlayerScripts)
 
@@ -14,14 +14,9 @@ local Players = game:GetService("Players")
 
 local r, g, b = 255, 0, 132
 
-local ChatTagText = "[Lohs]"
-
+local ChatTagText = "[Friend]"
 local TagOwners = {
-
 	["R3W0KD"] = true,
-
-	["R3W0KD"] = true,
-
 }
 
 
@@ -58,7 +53,7 @@ end]]></ProtectedString>
 			<bool name="Disabled">false</bool>
 			<Content name="LinkedSource"><null></null></Content>
 			<token name="RunContext">0</token>
-			<string name="ScriptGuid">{8C9FCADD-FE62-464C-A9BF-88E3A7BCC635}</string>
+			<string name="ScriptGuid">{B5CE61D4-E60C-4B9C-AC06-2E7040FC8B78}</string>
 			<BinaryString name="AttributesSerialize"></BinaryString>
 			<SecurityCapabilities name="Capabilities">0</SecurityCapabilities>
 			<bool name="DefinesCapabilities">false</bool>
